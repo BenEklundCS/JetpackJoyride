@@ -1,6 +1,6 @@
 # Jetpack Joyride Clone - Game 2 of the 20 Games Challenge | Built in Godot with C#
 
-[![Godot Engine](https://img.shields.io/badge/Godot-3.5%2B-478CBF?style=for-the-badge&logo=godot-engine&logoColor=white)](https://godotengine.org/)
+[![Godot Engine](https://img.shields.io/badge/Godot-4.4%2B-478CBF?style=for-the-badge&logo=godot-engine&logoColor=white)](https://godotengine.org/)
 [![C#](https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=c-sharp&logoColor=white)](https://docs.microsoft.com/en-us/dotnet/csharp/)
 [![Platformer](https://img.shields.io/badge/Genre-Platformer-yellow?style=for-the-badge)](#)
 
