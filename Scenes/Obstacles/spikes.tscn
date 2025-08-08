@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://leuehquwa1aq"]
+
+[ext_resource type="Script" uid="uid://bvjj7iikgefd4" path="res://Scripts/Obstacles/Spikes.cs" id="1_s0lki"]
+[ext_resource type="Texture2D" uid="uid://if4wao5j01wv" path="res://Assets/hazards/16-bit-spike-Sheet.png" id="2_c8qqk"]
+[ext_resource type="PackedScene" uid="uid://c6hl5132d1ei5" path="res://Scenes/Components/kill_box.tscn" id="3_42v1o"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_42v1o"]
+atlas = ExtResource("2_c8qqk")
+region = Rect2(0, 0, 15.977, 16.0126)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rkkd8"]
+size = Vector2(15.125, 13.25)
+
+[node name="Spikes" type="CharacterBody2D"]
+scale = Vector2(4, 4)
+script = ExtResource("1_s0lki")
+
+[node name="Pivot" type="Node2D" parent="."]
+position = Vector2(7.5, 135)
+
+[node name="Sprite2D" type="Sprite2D" parent="Pivot"]
+z_index = -50
+position = Vector2(0.5, -97)
+rotation = -3.14159
+texture = SubResource("AtlasTexture_42v1o")
+
+[node name="KillBox" parent="Pivot" instance=ExtResource("3_42v1o")]
+position = Vector2(-7.5, -135)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pivot/KillBox"]
+position = Vector2(8.1875, 36.375)
+shape = SubResource("RectangleShape2D_rkkd8")

@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://kmvwxdh5hgev"]
+
+[ext_resource type="Script" uid="uid://dvlufpweul4e7" path="res://Scripts/Obstacles/DoubleWall.cs" id="1_0empy"]
+[ext_resource type="PackedScene" uid="uid://5jx3j6m3qcvd" path="res://Scenes/Obstacles/wall.tscn" id="2_uvl5f"]
+
+[node name="DoubleWall" type="Node2D"]
+position = Vector2(-9, -100)
+script = ExtResource("1_0empy")
+
+[node name="Wall" parent="." instance=ExtResource("2_uvl5f")]
+position = Vector2(11, -270)
+Flippable = false
+
+[node name="Wall2" parent="." instance=ExtResource("2_uvl5f")]
+position = Vector2(394, 1237)
+rotation = 3.14046
+Flippable = false
