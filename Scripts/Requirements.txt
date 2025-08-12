@@ -7,6 +7,7 @@
 ✅ The score increases with distance. The goal is to beat your previous score, so the high score should be displayed alongside the current score.
 ✅ Player should flash red when hit 
 TODO: Sounds (keep it simple, backing music, player hit sound, missile sound if I add them)
+TODO: Add Title Screen with Reset Score functionality
 TODO: Missile launcher obstacle, starts spawning after a certain distance, missiles are easily dodgeable but do damage on hit
 
 Stretch goal:

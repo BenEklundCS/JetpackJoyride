@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cw7finuugjqxb"]
+[gd_scene load_steps=3 format=3 uid="uid://cw7finuugjqxb"]
 
 [ext_resource type="Script" uid="uid://besto1sm0ejsp" path="res://Scripts/UI/UserInterface.cs" id="1_s86y4"]
+[ext_resource type="FontFile" uid="uid://dm60hn86l0ueh" path="res://Assets/fonts/fonts/droid-sans/DroidSans-Bold.ttf" id="2_636u5"]
 
 [node name="UI" type="Control"]
 z_index = 100
@@ -44,19 +45,21 @@ vertical_alignment = 1
 [node name="Score" type="Label" parent="."]
 layout_mode = 0
 offset_left = 1580.0
-offset_top = 151.0
+offset_top = 155.0
 offset_right = 1920.0
-offset_bottom = 298.0
+offset_bottom = 302.0
+theme_override_fonts/font = ExtResource("2_636u5")
 text = "10000"
 horizontal_alignment = 2
 
 [node name="HighScore" type="Label" parent="."]
 layout_mode = 0
 offset_left = 1580.0
-offset_top = 124.0
+offset_top = 129.0
 offset_right = 1920.0
-offset_bottom = 271.0
+offset_bottom = 276.0
 theme_override_colors/font_color = Color(0.893743, 0.920975, 0.218839, 1)
+theme_override_fonts/font = ExtResource("2_636u5")
 theme_override_font_sizes/font_size = 25
 text = "10000"
 horizontal_alignment = 2

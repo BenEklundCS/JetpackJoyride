@@ -1,12 +1,23 @@
-﻿namespace JetPackJoyride.Scripts;
+﻿using System;
+using System.IO;
 using Godot;
+
+namespace JetPackJoyride.Scripts;
+using Godot;
+using static Godot.GD;
 
 public struct GameData { public int HighScore; }
 
 public partial class GameSaver : Node {
+    private GameData _dummyGameData;
+    
     private const string SaveDir  = "user://Saves";
     private const string SavePath = SaveDir + "/game_save.tres";
     private const string GdSaveScriptPath = "res://Scripts/GameSave.gd";
+
+    public override void _Ready() {
+        _dummyGameData = new GameData { HighScore = 0 };
+    }
 
     public void Save(GameData data) {
         using var dir = DirAccess.Open("user://");
@@ -29,8 +40,8 @@ public partial class GameSaver : Node {
         if (err != Error.Ok) GD.PrintErr($"Save failed: {err}");
     }
 
-    public GameData? Load() {
-        if (!ResourceLoader.Exists(SavePath)) return null;
+    public GameData Load() {
+        if (!ResourceLoader.Exists(SavePath)) return _dummyGameData;
 
         var res = ResourceLoader.Load<Resource>(
                 SavePath, 
@@ -38,9 +49,13 @@ public partial class GameSaver : Node {
                 cacheMode: ResourceLoader.CacheMode.Ignore
             );
         
-        if (res == null) { GD.PrintErr("Load failed"); return null; }
+        if (res == null) { GD.PrintErr("Load failed"); return _dummyGameData; }
 
         var hs = (int)res.Get("high_score");
         return new GameData { HighScore = hs };
+    }
+
+    public void Clear() {
+        DirAccess.Open("user://").Remove(SavePath);
     }
 }
