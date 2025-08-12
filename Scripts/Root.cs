@@ -11,7 +11,6 @@ namespace JetPackJoyride.Scripts {
         private UserInterface _ui;
         private Controller _controller;
         private Player _player;
-        private AudioStreamPlayer _track;
         // scorekeeping
         private double _timeAlive = 0.0f;
         [Export] public bool Debug = false;
@@ -19,7 +18,6 @@ namespace JetPackJoyride.Scripts {
         public override void _Ready() {
             // game saver
             _saver = GetNode<GameSaver>("GameSaver");
-            _track =  GetNode<AudioStreamPlayer>("Track");
             // attempt to load save
             var loadedData = _saver.Load();
             _ui = GetNode<UserInterface>("UI");

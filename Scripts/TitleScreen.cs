@@ -26,11 +26,9 @@ namespace JetpackJoyride.Scripts {
         
         // sound
         private AudioStreamPlayer _click;
-        private AudioStreamPlayer _track;
 
         public override void _Ready() {
             _click = GetNode<AudioStreamPlayer>("ButtonBar/Click");
-            _track = GetNode<AudioStreamPlayer>("Track");
             
             _saver = GetNode<GameSaver>("GameSaver");
             _highScore = GetNode<Label>("HighScore");
