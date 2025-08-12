@@ -1,4 +1,5 @@
 using System.Runtime.InteropServices.JavaScript;
+using System.Threading.Tasks;
 using Godot;
 using JetPackJoyride.Scripts;
 using static Godot.GD;
@@ -22,8 +23,15 @@ namespace JetpackJoyride.Scripts {
 
         private Display _display;
         private static int _displayOpenedTimes = 0;
+        
+        // sound
+        private AudioStreamPlayer _click;
+        private AudioStreamPlayer _track;
 
         public override void _Ready() {
+            _click = GetNode<AudioStreamPlayer>("ButtonBar/Click");
+            _track = GetNode<AudioStreamPlayer>("Track");
+            
             _saver = GetNode<GameSaver>("GameSaver");
             _highScore = GetNode<Label>("HighScore");
             
@@ -60,16 +68,26 @@ namespace JetpackJoyride.Scripts {
                 _highScore.SetVisible(true);
             }
         }
+
+        private SignalAwaiter OnClick()
+        {
+            _click.Play();
+            return ToSignal(_click, AudioStreamPlayer.SignalName.Finished);
+        }
         
-        private void OnStartPressed() {
+        private async void OnStartPressed() {
+            await OnClick();
             GetTree().ChangeSceneToFile("res://Scenes/root.tscn");
         }
 
-        private void OnResetPressed() {
+        private async void OnResetPressed() {
+            await OnClick();
             _saver.Clear();
+            _highScore.Text = "0";
         }
 
-        private void OnQuitPressed() {
+        private async void OnQuitPressed() {
+            await OnClick();
             GetTree().Quit();
         }
         

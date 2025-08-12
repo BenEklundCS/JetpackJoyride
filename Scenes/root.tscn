@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://teit3ji6sn8v"]
+[gd_scene load_steps=12 format=3 uid="uid://teit3ji6sn8v"]
 
 [ext_resource type="Script" uid="uid://rtaejjb2wvv5" path="res://Scripts/Root.cs" id="1_8pvmw"]
 [ext_resource type="PackedScene" uid="uid://ciuo1bp2vcgt6" path="res://Scenes/player.tscn" id="2_8pvmw"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://blorx5ogb1g5x" path="res://Scenes/scrolling_level.tscn" id="4_qtxxq"]
 [ext_resource type="PackedScene" uid="uid://5jx3j6m3qcvd" path="res://Scenes/Obstacles/wall.tscn" id="6_r3lo5"]
 [ext_resource type="PackedScene" uid="uid://ckbvfweiwy7rf" path="res://Scenes/Obstacles/laser.tscn" id="8_8fnbn"]
+[ext_resource type="AudioStream" uid="uid://cv5c6re6u8ekm" path="res://Assets/sounds/main.wav" id="10_8fnbn"]
 [ext_resource type="PackedScene" uid="uid://leuehquwa1aq" path="res://Scenes/Obstacles/spikes.tscn" id="11_a6f85"]
 [ext_resource type="PackedScene" uid="uid://3qerur40gni5" path="res://Scenes/game_saver.tscn" id="12_fu36u"]
 
@@ -52,5 +53,9 @@ position = Vector2(961, 118)
 shape = SubResource("RectangleShape2D_8pvmw")
 
 [node name="GameSaver" parent="." instance=ExtResource("12_fu36u")]
+
+[node name="Track" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_8fnbn")
+autoplay = true
 
 [connection signal="child_entered_tree" from="." to="." method="_on_child_entered_tree"]

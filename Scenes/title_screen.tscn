@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bfr3tucnwamyp"]
+[gd_scene load_steps=10 format=3 uid="uid://bfr3tucnwamyp"]
 
 [ext_resource type="Script" uid="uid://b14gam7sf6hg7" path="res://Scripts/TitleScreen.cs" id="1_6vd4x"]
 [ext_resource type="PackedScene" uid="uid://blorx5ogb1g5x" path="res://Scenes/scrolling_level.tscn" id="1_55kwv"]
@@ -6,7 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://b44s15ww01qeg" path="res://Assets/ui/PNG/Blue/Default/button_rectangle_depth_flat.png" id="3_6vd4x"]
 [ext_resource type="Texture2D" uid="uid://xcm47o1h3ape" path="res://Assets/ui/PNG/Grey/Default/button_rectangle_depth_flat.png" id="4_n82rj"]
 [ext_resource type="Texture2D" uid="uid://dywcjufdxmbo1" path="res://Assets/ui/PNG/Red/Default/button_rectangle_depth_flat.png" id="5_0061g"]
+[ext_resource type="AudioStream" uid="uid://drmohwj5agjfa" path="res://Assets/sounds/click.wav" id="7_0061g"]
 [ext_resource type="PackedScene" uid="uid://3qerur40gni5" path="res://Scenes/game_saver.tscn" id="7_n82rj"]
+[ext_resource type="AudioStream" uid="uid://wtgxen7gv1ks" path="res://Assets/sounds/intro.wav" id="9_0061g"]
 
 [node name="TitleScreen" type="Control"]
 layout_mode = 3
@@ -41,23 +43,22 @@ text = "Game Over
 "
 
 [node name="HighScore" type="Label" parent="."]
+visible = false
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = 5
 anchor_left = 0.5
-anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -19.0
-offset_top = 35.0
-offset_right = 21.0
-offset_bottom = 58.0
+offset_left = -103.0
+offset_top = 567.0
+offset_right = 109.0
+offset_bottom = 646.0
 grow_horizontal = 2
-grow_vertical = 2
 theme_override_colors/font_color = Color(0.893743, 0.920975, 0.218839, 1)
 theme_override_fonts/font = ExtResource("2_12m1t")
 theme_override_font_sizes/font_size = 32
-text = "100000000000
+text = "0
 "
+horizontal_alignment = 1
 
 [node name="ButtonBar" type="Control" parent="."]
 z_index = 200
@@ -76,7 +77,7 @@ anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
 offset_top = -36.0
-offset_right = 299.0
+offset_right = 200.0
 offset_bottom = 36.0
 grow_vertical = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -94,9 +95,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -92.0
+offset_left = -100.0
 offset_top = -36.0
-offset_right = 108.0
+offset_right = 100.0
 offset_bottom = 36.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -115,9 +116,8 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -239.0
+offset_left = -200.0
 offset_top = -36.0
-offset_right = -39.0
 offset_bottom = 36.0
 grow_horizontal = 0
 grow_vertical = 2
@@ -129,7 +129,14 @@ icon = ExtResource("5_0061g")
 flat = true
 icon_alignment = 1
 
+[node name="Click" type="AudioStreamPlayer" parent="ButtonBar"]
+stream = ExtResource("7_0061g")
+
 [node name="GameSaver" parent="." instance=ExtResource("7_n82rj")]
+
+[node name="Track" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_0061g")
+autoplay = true
 
 [connection signal="pressed" from="ButtonBar/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="ButtonBar/Reset" to="." method="_on_reset_pressed"]
