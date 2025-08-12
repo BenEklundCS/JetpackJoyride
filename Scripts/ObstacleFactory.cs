@@ -5,6 +5,8 @@ using static Godot.GD;
 
 namespace JetPackJoyride.Scripts {
     public partial class ObstacleFactory : Node2D {
+        [Export] public bool Debug = false;
+        
         public enum ObstacleType {
             Wall,
             DoubleWall,
@@ -12,7 +14,9 @@ namespace JetPackJoyride.Scripts {
         }
 
         public override void _Ready() {
-            Print(nameof(ObstacleFactory) + " spawned!");
+            if (Debug) {
+                Print(nameof(ObstacleFactory) + " spawned!");
+            }
         }
 
         public static Node GetRandomWall() {

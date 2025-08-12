@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=4 uid="uid://teit3ji6sn8v"]
+[gd_scene load_steps=18 format=4 uid="uid://teit3ji6sn8v"]
 
 [ext_resource type="Script" uid="uid://rtaejjb2wvv5" path="res://Scripts/Root.cs" id="1_8pvmw"]
 [ext_resource type="PackedScene" uid="uid://ciuo1bp2vcgt6" path="res://Scenes/player.tscn" id="2_8pvmw"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://ckbvfweiwy7rf" path="res://Scenes/Obstacles/laser.tscn" id="8_8fnbn"]
 [ext_resource type="Texture2D" uid="uid://d41dtyjj64d" path="res://Assets/tiles/2_Industrial_Tileset_1B_Background.png" id="8_r3lo5"]
 [ext_resource type="PackedScene" uid="uid://leuehquwa1aq" path="res://Scenes/Obstacles/spikes.tscn" id="11_a6f85"]
+[ext_resource type="PackedScene" uid="uid://3qerur40gni5" path="res://Scenes/game_saver.tscn" id="12_fu36u"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8fnbn"]
 texture = ExtResource("6_dun2r")
@@ -349,6 +350,9 @@ position = Vector2(1615, -2227)
 [node name="Laser" parent="Preloader" instance=ExtResource("8_8fnbn")]
 position = Vector2(2990, -1985)
 
+[node name="Spikes" parent="Preloader" instance=ExtResource("11_a6f85")]
+position = Vector2(1828, 2)
+
 [node name="Bounds" type="Node" parent="."]
 
 [node name="Area2D" type="StaticBody2D" parent="Bounds"]
@@ -363,7 +367,6 @@ shape = SubResource("RectangleShape2D_8pvmw")
 position = Vector2(961, 118)
 shape = SubResource("RectangleShape2D_8pvmw")
 
-[node name="Spikes" parent="." instance=ExtResource("11_a6f85")]
-position = Vector2(1828, 2)
+[node name="GameSaver" parent="." instance=ExtResource("12_fu36u")]
 
 [connection signal="child_entered_tree" from="." to="." method="_on_child_entered_tree"]

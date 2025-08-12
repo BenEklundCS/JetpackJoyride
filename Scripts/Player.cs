@@ -18,10 +18,13 @@ namespace JetPackJoyride.Scripts {
         [Export] public int Hp = 3;
         [Export] public int FlashTimes = 6;
         [Export] public float FlashRate = 0.25f; // test
+        [Export] public bool Debug = false;
 
         // called on scene init
         public override void _Ready() {
-            Print(nameof(Player) + " spawned!");
+            if (Debug) {
+                Print(nameof(Player) + " spawned!");
+            }
             _animatedSprite2D = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
             _particles = GetNode<GpuParticles2D>("GPUParticles2D");
             _flashRedTimer = new Timer(0.0f, FlashRate, 0.0f, false);
@@ -51,7 +54,9 @@ namespace JetPackJoyride.Scripts {
         }
         
         public void Hit(int damage) {
-            Print($"I've been hit! {damage}");
+            if (Debug) {
+                Print($"I've been hit! {damage}");
+            }
             Hp -= damage;
             _hit = true;
             if (Hp <= 0) {

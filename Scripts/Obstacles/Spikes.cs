@@ -6,13 +6,16 @@ namespace JetPackJoyride.Scripts.Obstacles {
     public partial class Spikes : Obstacle {
         [Export] public int MaxSpikeCount = 5;
         [Export] public int MinSpikeCount = 1;
+        [Export] public bool Debug = false;
         
         private int _spikeCount = 1;
 
         private Node2D _pivot;
         
         public override void _Ready() {
-            Print(nameof(Spikes) + " spawned!");
+            if (Debug) {
+                Print(nameof(Spikes) + " spawned!");
+            }
             _pivot = GetNode<Node2D>("Pivot");
 
             var type = GetRandomType();

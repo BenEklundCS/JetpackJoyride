@@ -7,6 +7,8 @@ using Timer = JetPackJoyride.Scripts.Components.Timer;
 
 namespace JetPackJoyride.Scripts {
     public partial class Root : Node2D {
+        // level saver
+        private GameSaver _saver;
         // nodes
         private Node2D _scrollPoint;
         private ObstacleFactory _obstacleFactory;
@@ -20,12 +22,23 @@ namespace JetPackJoyride.Scripts {
         private Vector2 _scrollPointOrigin;
         // scorekeeping
         private double _timeAlive = 0.0f;
+        // gameover
+        private bool _gameOver = false;
+
+        [Export] public bool Debug = false;
 
         public override void _Ready() {
+            // game saver
+            _saver = GetNode<GameSaver>("GameSaver");
+            // attempt to load save
+            var loadedData = _saver.Load();
             // nodes
             _obstacleFactory = GetNode<ObstacleFactory>("ObstacleFactory");
             _scrollPoint = GetNode<Node2D>("ScrollPoint");
             _ui = GetNode<UserInterface>("UI");
+            if (loadedData != null) {
+                _ui.SetGameData((GameData)loadedData);
+            }
             _controller = GetNode<Controller>("Controller");
             _player = GetNode<Player>("Controller/Player");
             
@@ -60,16 +73,22 @@ namespace JetPackJoyride.Scripts {
                 UpdateInterface();
             }
             else {
-                GameOver();
+                if (!_gameOver) {
+                    GameOver();
+                }
             }
         }
 
         public override void _EnterTree() {
-            Print("Game Started");
+            if (Debug) {
+                Print("Game Started");
+            }
         }
 
-        public override void _ExitTree() { 
-            Print("Game Over");
+        public override void _ExitTree() {
+            if (Debug) {
+                Print("Game Over");
+            }
         }
 
         private void UpdateInterface() {
@@ -77,8 +96,14 @@ namespace JetPackJoyride.Scripts {
         }
 
         private void GameOver() {
+            _gameOver = true;
             _ui.SetHealthVisible(false);
             _ui.SetGameOverVisible(true);
+            SaveGameData();
+        }
+
+        private void SaveGameData() {
+            _saver.Save(_ui.GetGameData());
         }
 
         private void AddNodeFromFactory(Node2D node) {

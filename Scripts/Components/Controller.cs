@@ -25,9 +25,17 @@ namespace JetPackJoyride.Scripts.Components {
             player.SetBoosting(boosting);   
         }
 
+        private void Reload() {
+            GetTree().ReloadCurrentScene();
+        }
+
+        private void Quit() {
+            GetTree().Quit();
+        }
+
         private void GlobalInput() {
-            if (Input.IsActionJustPressed("reload")) GetTree().ReloadCurrentScene();
-            if (Input.IsActionJustPressed("quit")) GetTree().Quit();
+            if (Input.IsActionJustPressed("reload")) CallDeferred(nameof(Reload));
+            if (Input.IsActionJustPressed("quit")) CallDeferred(nameof(Quit));
         }
     }
 }

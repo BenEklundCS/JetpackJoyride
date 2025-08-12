@@ -1,4 +1,5 @@
 ﻿using Godot;
+using static Godot.GD;
 using System;
 using System.Linq;
 
@@ -10,21 +11,40 @@ namespace JetPackJoyride.Scripts.UI {
         private Label _health;
         private Label _gameOver;
         private Label _score;
+        private double _s;
+        private double _hs;
+        private Label _highScore;
         
         private const string HealthIcon = "❤️";
         public override void _Ready() {
             _health = GetNode<Label>("Health");
             _gameOver = GetNode<Label>("GameOver");
             _score = GetNode<Label>("Score");
+            _highScore = GetNode<Label>("HighScore");
+            _s = 0;
+            _hs = _s;
         }
 
         public override void _Process(double delta) {   
             
         }
 
+        public void SetGameData(GameData gameData) {
+            _hs = gameData.HighScore;
+        }
+
+        public GameData GetGameData() {
+            GameData gameData = new GameData();
+            gameData.HighScore = (int)_hs;
+            return gameData;
+        }
+
         public void UpdateUserInterface(Player player, double timeAlive) {
             _health.Text = HpToHearts(player.Hp);
+            _s = timeAlive * ScorePerSecond;
+            _hs = Math.Max(_s, _hs);
             _score.Text = FormatScore(timeAlive * ScorePerSecond);
+            _highScore.Text = FormatScore(_hs);
         }
 
         public void SetGameOverVisible(bool visibility) {

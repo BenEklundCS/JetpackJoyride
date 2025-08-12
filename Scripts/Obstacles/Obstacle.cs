@@ -6,6 +6,7 @@ namespace JetPackJoyride.Scripts.Obstacles {
     public abstract partial class Obstacle : CharacterBody2D {
         
         [Export] public int DeleteOffset = 1000;
+        [Export] public bool Debug = false;
         protected enum Type {
             Top,
             Bottom
@@ -18,7 +19,9 @@ namespace JetPackJoyride.Scripts.Obstacles {
         
         protected void CheckDeath() {
             if (GlobalPosition.X < -(DeleteOffset)) {
-                Print("Deleting object.");
+                if (Debug) {
+                    Print("Deleting object.");
+                }
                 QueueFree();
             }
         }

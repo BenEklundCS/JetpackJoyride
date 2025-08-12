@@ -7,9 +7,12 @@ namespace JetPackJoyride.Scripts.Obstacles {
         private Node2D _pivot;
         private Sprite2D _sprite;
         [Export] public bool Flippable = true;
+        [Export] public bool Debug = false;
 
         public override void _Ready() {
-            Print(nameof(Wall) + " spawned!");
+            if (Debug) {
+                Print(nameof(Wall) + " spawned!");
+            }
             // find the pivot
             _pivot = GetNode<Node2D>("Pivot");
 
