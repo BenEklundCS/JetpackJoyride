@@ -2,6 +2,7 @@
 using Godot;
 using JetPackJoyride.Scripts.UI;
 using JetPackJoyride.Scripts.Components;
+using JetPackJoyride.Scripts.Obstacles;
 using static Godot.GD;
 
 namespace JetPackJoyride.Scripts {
@@ -11,9 +12,11 @@ namespace JetPackJoyride.Scripts {
         private UserInterface _ui;
         private Controller _controller;
         private Player _player;
+        private MissileLauncher _missileLauncher;
         // scorekeeping
         private double _timeAlive = 0.0f;
         [Export] public bool Debug = false;
+        [Export] public int MinimumMissileLauncherScore = 1000;
 
         public override void _Ready() {
             // game saver
@@ -24,6 +27,7 @@ namespace JetPackJoyride.Scripts {
             _ui.SetGameData(loadedData);
             _controller = GetNode<Controller>("Controller");
             _player = GetNode<Player>("Controller/Player");
+            _missileLauncher = GetNode<Node2D>("ScrollingLevel").GetNode<MissileLauncher>("MissileLauncher");
         }
 
         public override void _Process(double delta) {
@@ -33,6 +37,9 @@ namespace JetPackJoyride.Scripts {
             // check for player death
             if (IsInstanceValid(_player)) {
                 UpdateInterface();
+                if (_ui.GetScore() > MinimumMissileLauncherScore) {
+                    EnableMissileLauncher();
+                }
             }
             else {
                 GameOver();
@@ -62,6 +69,10 @@ namespace JetPackJoyride.Scripts {
 
         private void SaveGameData() {
             _saver.Save(_ui.GetGameData());
+        }
+
+        private void EnableMissileLauncher() {
+            _missileLauncher.Enabled = true;
         }
     }
 }

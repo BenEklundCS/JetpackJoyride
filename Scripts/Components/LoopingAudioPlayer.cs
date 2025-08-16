@@ -5,7 +5,7 @@ namespace JetpackJoyride.Scripts.Components {
     public partial class LoopingAudioPlayer : Node {
         [Export] public AudioStreamPlayer AudioStreamPlayer;
 
-        override public void _Ready() {
+        public override void _Ready() {
             AudioStreamPlayer.Finished += OnAudioStreamPlayerFinished;
         }
 

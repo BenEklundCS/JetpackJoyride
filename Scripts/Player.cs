@@ -7,6 +7,7 @@ namespace JetPackJoyride.Scripts {
         // nodes
         private AnimatedSprite2D _animatedSprite2D;
         private GpuParticles2D _particles;
+        private AudioStreamPlayer _hitSound;
         private bool _boosting = false;
         // hit handling
         private Timer _flashRedTimer;
@@ -27,6 +28,7 @@ namespace JetPackJoyride.Scripts {
             }
             _animatedSprite2D = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
             _particles = GetNode<GpuParticles2D>("GPUParticles2D");
+            _hitSound = GetNode<AudioStreamPlayer>("HitSound");
             _flashRedTimer = new Timer(0.0f, FlashRate, 0.0f, false);
         }
 
@@ -59,6 +61,7 @@ namespace JetPackJoyride.Scripts {
             }
             Hp -= damage;
             _hit = true;
+            _hitSound.Play();
             if (Hp <= 0) {
                 Kill();
             }

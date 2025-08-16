@@ -16,14 +16,25 @@ namespace JetPackJoyride.Scripts.Obstacles {
             MoveAndSlide();
             CheckDeath();
         }
+
+        protected bool OutOfBoundsX() {
+            return (GlobalPosition.X < -(DeleteOffset));
+        }
+
+        protected bool OutOfBoundsY() {
+            return (GlobalPosition.Y < 0 || GlobalPosition.Y > GetViewport().GetVisibleRect().Size.Y);
+        }
         
-        protected void CheckDeath() {
-            if (GlobalPosition.X < -(DeleteOffset)) {
-                if (Debug) {
-                    Print("Deleting object.");
-                }
-                QueueFree();
+        private void CheckDeath() {
+            if (!OutOfBoundsX()) {
+                return;
             }
+            
+            if (Debug) {
+                Print("Deleting object.");
+            }
+            
+            QueueFree();
         }
         
         protected static Type GetRandomType() {

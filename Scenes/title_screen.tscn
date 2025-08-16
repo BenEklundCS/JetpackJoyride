@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bfr3tucnwamyp"]
+[gd_scene load_steps=12 format=3 uid="uid://bfr3tucnwamyp"]
 
 [ext_resource type="Script" uid="uid://b14gam7sf6hg7" path="res://Scripts/TitleScreen.cs" id="1_6vd4x"]
 [ext_resource type="PackedScene" uid="uid://blorx5ogb1g5x" path="res://Scenes/scrolling_level.tscn" id="1_55kwv"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://3qerur40gni5" path="res://Scenes/game_saver.tscn" id="7_n82rj"]
 [ext_resource type="PackedScene" uid="uid://d0ydgkpkonj2" path="res://Scenes/Components/looping_audio_player.tscn" id="9_8mikk"]
 [ext_resource type="AudioStream" uid="uid://wtgxen7gv1ks" path="res://Assets/sounds/intro.wav" id="9_0061g"]
+[ext_resource type="AudioStream" uid="uid://tecwrvo7d6g3" path="res://Assets/sounds/game_over.mp3" id="11_sqelc"]
 
 [node name="TitleScreen" type="Control"]
 layout_mode = 3
@@ -140,7 +141,9 @@ AudioStreamPlayer = NodePath("Track")
 
 [node name="Track" type="AudioStreamPlayer" parent="LoopingAudioPlayer"]
 stream = ExtResource("9_0061g")
-autoplay = true
+
+[node name="GameOverSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_sqelc")
 
 [connection signal="pressed" from="ButtonBar/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="ButtonBar/Reset" to="." method="_on_reset_pressed"]

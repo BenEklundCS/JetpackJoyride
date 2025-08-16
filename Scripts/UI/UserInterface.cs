@@ -59,6 +59,12 @@ namespace JetPackJoyride.Scripts.UI {
             _score.Visible = visible;
         }
 
+        public double GetScore() {
+            return _s;
+        }
+        
+        
+
         private static string HpToHearts(int hp) {
             return string.Concat(Enumerable.Repeat(HealthIcon, hp));
         }

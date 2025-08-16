@@ -11,6 +11,7 @@ namespace JetPackJoyride.Scripts {
             Wall,
             DoubleWall,
             Spikes,
+            Missile,
         }
 
         public override void _Ready() {
@@ -30,6 +31,7 @@ namespace JetPackJoyride.Scripts {
                 ObstacleType.Wall => Load<PackedScene>("res://Scenes/Obstacles/wall.tscn").Instantiate(),
                 ObstacleType.DoubleWall => Load<PackedScene>("res://Scenes/Obstacles/double_wall.tscn").Instantiate(),
                 ObstacleType.Spikes => Load<PackedScene>("res://Scenes/Obstacles/spikes.tscn").Instantiate(),
+                ObstacleType.Missile => Load<PackedScene>("res://Scenes/Obstacles/missile.tscn").Instantiate(),
                 _ => null
             };
         }

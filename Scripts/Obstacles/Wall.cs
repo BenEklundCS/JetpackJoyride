@@ -7,7 +7,7 @@ namespace JetPackJoyride.Scripts.Obstacles {
         private Node2D _pivot;
         private Sprite2D _sprite;
         [Export] public bool Flippable = true;
-        [Export] public bool Debug = false;
+        [Export] public new bool Debug = false;
 
         public override void _Ready() {
             if (Debug) {

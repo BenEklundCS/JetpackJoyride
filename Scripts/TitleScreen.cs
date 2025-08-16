@@ -26,9 +26,13 @@ namespace JetpackJoyride.Scripts {
         
         // sound
         private AudioStreamPlayer _click;
+        private AudioStreamPlayer _track;
+        private AudioStreamPlayer _gameOver;
 
         public override void _Ready() {
             _click = GetNode<AudioStreamPlayer>("ButtonBar/Click");
+            _gameOver = GetNode<AudioStreamPlayer>("GameOverSound");
+            _track = GetNode<AudioStreamPlayer>("LoopingAudioPlayer/Track");
             
             _saver = GetNode<GameSaver>("GameSaver");
             _highScore = GetNode<Label>("HighScore");
@@ -58,13 +62,20 @@ namespace JetpackJoyride.Scripts {
                 _start.Text = "START";
                 _reset.Text = "RESET";
                 _quit.Text = "QUIT";
+                PlayTrack();
             }
             else {
                 _title.Text = "Game Over\n";
                 _start.Text = "RESTART";
                 _highScore.Text = FormatScore(_saver.Load().HighScore);
                 _highScore.SetVisible(true);
+                _gameOver.Play();
+                _gameOver.Finished += PlayTrack;
             }
+        }
+
+        private void PlayTrack() {
+            _track.Play();
         }
 
         private SignalAwaiter OnClick()

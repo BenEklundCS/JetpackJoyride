@@ -4,12 +4,7 @@ using System;
 
 namespace JetPackJoyride.Scripts.Obstacles {
     public partial class Spikes : Obstacle {
-        [Export] public int MaxSpikeCount = 5;
-        [Export] public int MinSpikeCount = 1;
-        [Export] public bool Debug = false;
-        
-        private int _spikeCount = 1;
-
+        [Export] public new bool Debug = false;
         private Node2D _pivot;
         
         public override void _Ready() {
@@ -24,13 +19,6 @@ namespace JetPackJoyride.Scripts.Obstacles {
             }
 
             Velocity = new Vector2(-(Globals.LevelMoveSpeed / 2), 0);
-            _spikeCount = GetRandomSpikeCount();
-            
-            
-        }
-
-        private int GetRandomSpikeCount() {
-            return Globals.GlobalRandom.Next(MinSpikeCount, MaxSpikeCount);
         }
 
         private new void SetRotation(float rotation) {
